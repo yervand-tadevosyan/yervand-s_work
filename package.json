@@ -1,0 +1,30 @@
+{
+  "name": "yervand-s_work",
+  "version": "0.0.2",
+  "description": "Yervand",
+  "main": "index.js",
+  "scripts":{
+    "dev": "nodemon server.js"
+  },
+    
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yervand-tadevosyan/yervand-s_work.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yervand-tadevosyan/yervand-s_work/issues"
+  },
+  "homepage": "https://github.com/yervand-tadevosyan/yervand-s_work#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
