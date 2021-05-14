@@ -2,23 +2,48 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <meta name="google-signin-client_id" content="766622694795-iv0d9qnj0l8md1sca2aalk2fn0uvs7v5.apps.googleusercontent.com">
+        <meta name="google-signin-client_id" content="472980720305-oloeeeoq7gp172b1sjrj1dqtoud16daa.apps.googleusercontent.com">
         <title>Login</title>
+        <link href="/style.css" rel="stylesheet" type="text/css" />
         <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
     <body>
         <h1>Login page!!</h1>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
    
-   
+        <a id = "signout_login" href="/#" onclick="signOut();">Sign out</a>
+
         <script>
-           function onSignIn(googleUser) {
-               var profile = googleUser.getBasicProfile();
+            function onSignIn(googleUser) {
+                var id_token = googleUser.getAuthResponse().id_token;
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/login');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function() {
+                    console.log('Signed in as: ' + googleUser.getBasicProfile().getName() +  " "  + xhr.responseText);
+                      if (xhr.responseText ==  'success') {
+                        //signOut();
+                        location.assign('/index');
+                    }
+                };
+                xhr.send(JSON.stringify({token: id_token}));
+            }
+
+            
+		    function signOut() {
+			    var auth2 = gapi.auth2.getAuthInstance();
+			    auth2.signOut().then(function () {
+			        console.log('User signed out.');
+                    
+			});
+		}   
+            
+            /* var profile = googleUser.getBasicProfile();
                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
                console.log('Name: ' + profile.getName());
                console.log('Image URL: ' + profile.getImageUrl());
-               console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-            }
+               console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.*/
+           
         </script>
     </body>
 </html>
